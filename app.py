@@ -42,7 +42,7 @@ st.markdown(
 
 
 @st.cache_resource
-def load_model():
+def load_model():    return tf.keras.models.load_model("sentiment_model.keras", compile=False)
     return 
 
 
@@ -120,7 +120,7 @@ elif page == "Sentiment Studio":
             st.warning("Enter a review first, or select one of the sample reviews.")
         else:
             with st.spinner("Reading review…"):
-                score = float(load_model().predict(tf.constant([review]), verbose=0)[0][0])
+                score = float(load_model()(tf.constant([review]), training=False)[0][0].numpy())
             sentiment = "Positive" if score >= 0.5 else "Negative"
             confidence = score if score >= 0.5 else 1 - score
             st.session_state["last_result"] = {"review": review, "sentiment": sentiment, "confidence": confidence, "positive_probability": score}
