@@ -43,7 +43,7 @@ st.markdown(
 
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model("sentiment_model.keras")
+    return 
 
 
 @st.cache_data
